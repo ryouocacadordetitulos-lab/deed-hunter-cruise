@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply antialiased bg-navy-900 text-white;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@layer utilities {
+  .gold-gradient {
+    background: linear-gradient(135deg, #F5D078, #D4AF37, #C8A84B);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .gold-border-gradient {
+    border: 1px solid transparent;
+    background: linear-gradient(#0D1F3C, #0D1F3C) padding-box,
+                linear-gradient(135deg, #F5D078, #D4AF37, #C8A84B) border-box;
+  }
+  .navy-gradient {
+    background: linear-gradient(180deg, #060E1A 0%, #0A1628 50%, #0D1F3C 100%);
+  }
+  .section-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  }
+  .section-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
