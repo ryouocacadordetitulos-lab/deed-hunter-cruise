@@ -1,44 +1,39 @@
-# REFERENCES.md — The Deed Hunter World At Sea
+# REFERENCES.md — Visual Analysis
 
-## Overall Feel
-Design de landing page de cruzeiro de luxo com mastermind de negócios. Estética premium navy + gold. Fundo escuro azul marinho profundo com elementos dourados que evocam exclusividade, riqueza e oceano à noite. Tipografia serifada para títulos (editorial/clássico) e sans-serif para corpo (moderno/legível).
+## Source
+User-attached reference image (single screenshot of existing landing page)
 
-## Palette
-| Role | Hex | Usage |
-|------|-----|-------|
-| Primary / Background | #0A1628 | Fundo principal dark navy |
-| Surface / Cards | #0D1F3C | Cards e seções |
-| Gold Primary | #D4AF37 | Títulos principais, bordas |
-| Gold Light | #F5D078 | Destaques, hover states |
-| Gold Muted | #C8A84B | Texto secundário dourado |
-| White | #FFFFFF | Texto de corpo |
-| Cyan Accent | #4DD9E0 | Detalhes sutis, ícones |
-| Surface Raised | #122040 | Hover de cards |
+## Visual Style
+### Colors
+- Background: Deep navy/dark blue (#0B1537)
+- Primary accent: Gold/champagne (#C9A84C)
+- Secondary gold: lighter (#E8C86A)
+- Text: White (#FFFFFF) on dark
+- Card border: Gold gradient
 
-## Typography
-- **Display/Titles:** Playfair Display (serif), 700-900 weight — elegância clássica
-- **Body:** Inter (sans-serif), 400-600 weight — leitura limpa
-- **Badges/Labels:** Inter, uppercase, letter-spacing wide
+### Typography
+- Display/headings: Cinzel (serif, elegant, luxury feel)
+- Body: Lato (clean sans-serif)
+- Accent labels: Cinzel Decorative or Cinzel caps
 
-## Layout / Grid
-1. Hero — fullscreen background navio, overlay dark, título central, date badge, CTA
-2. Event Details — 3 colunas: data, local, tipo do evento
-3. Pricing Card — destaque com preço riscado e preço final dourado
-4. Includes / Excludes — 2 colunas lado a lado
-5. Cabins — 2 cards: Interna e Varanda
-6. About Marcos — foto + bio + credenciais
-7. WhatsApp CTA — seção de contato com botão grande
-8. Footer — legal disclaimer
+### Layout
+- Full-width hero with ship background
+- Centered content, max-width container
+- Authority figure (bald bearded man in dark suit) positioned prominently
+- Globe/ship logo with gold star accents at top
+- Gold horizontal separator lines
 
-## Key Imagery (to generate)
-- `hero-bg.png` — oceano à noite com reflexos dourados, azul marinho profundo
-- `hero-ship.png` — navio de cruzeiro luxuoso à noite, visto lateralmente
-- `logo-globe.png` — globo dourado com navio, fundo transparente
-- `marcus-portrait.png` — executivo/mentor, careca, barba, terno escuro, lenço
+### Key UI Patterns
+- "EXCLUSIVO" badge: gold background, black text, uppercase
+- Pricing card: gold border, dark navy bg, prominent OFF badge
+- Includes/Not includes: two-column grid with check/x icons in gold/red
+- CTA button: green (WhatsApp color) with WhatsApp icon
+- Wave/ornament SVG at footer
 
-## CTAs / Links
-- WhatsApp: https://wa.me/16892650838
+### Imagery
+- Hero bg: luxury cruise ship at sunset/golden hour
+- Authority figure: bald bearded man, dark suit, shot from below, dramatic lighting
+- Logo: globe with compass rose, gold, nautical theme
 
-## What to Keep vs. Reinvent
-**Keep:** paleta navy+gold, tipografia serifada nos títulos, layout de landing de evento premium
-**Reinvent:** todo conteúdo é original para Marcos Jacober, sem copiar de terceiros
+### Mood
+Premium, exclusive, luxury event, authority, confidence, tropical/nautical adventure

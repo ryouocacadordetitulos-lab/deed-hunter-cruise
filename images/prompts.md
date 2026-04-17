@@ -1,36 +1,13 @@
-# Image Prompts Log
+# Image Generation Prompts
 
-## 2026-04-16
+## hero-person.png
+**Model:** gpt-image-1.5 | **Size:** 1024x1536 | **Quality:** high
+**Prompt:** Bald, bearded, confident male authority figure in a tailored dark navy suit with a patterned scarf, photographed from slightly below, dramatic god-ray lighting from above, dark cinematic navy background with subtle ship silhouette barely visible, 85mm portrait lens, shallow depth of field, ultra sharp facial features, powerful executive presence, photographic quality, no text
 
-### hero-bg.png
-- **Model:** gpt-image-1.5
-- **Size:** 1536x1024
-- **Quality:** high
-- **Command:** `openai-image generate`
-- **Prompt:** "Deep ocean night scene for luxury cruise landing page: dark navy blue ocean with golden reflections on calm water surface, dramatic cinematic atmosphere, deep dark sky with subtle stars, gold and dark blue color palette, luxurious and exclusive mood, abstract and atmospheric, no people, no text, wide format"
-- **Result:** ✅ Generated successfully
+## hero-bg.png
+**Model:** gpt-image-1.5 | **Size:** 1536x1024 | **Quality:** high
+**Prompt:** Luxury mega cruise ship sailing at golden hour dusk on calm ocean, dramatic orange and deep blue sky, ultra wide angle 21mm lens, cinematic sweep, majestic scale, rich colors, no text, no people in foreground
 
-### hero-ship.png
-- **Model:** gpt-image-1.5
-- **Size:** 1536x1024
-- **Quality:** high
-- **Command:** `openai-image generate`
-- **Prompt:** "Luxury cruise ship at night, dramatic side view, golden lights reflecting on calm dark ocean, cinematic photography style, deep navy blue sky with stars, ship illuminated with warm golden lights, majestic and grand, no text, wide landscape composition, high detail"
-- **Result:** ✅ Generated successfully
-
-### logo-globe.png
-- **Model:** gpt-image-1.5
-- **Size:** 1024x1024
-- **Quality:** high
-- **Background:** transparent
-- **Command:** `openai-image generate`
-- **Prompt:** "Premium minimalist logo icon: stylized golden globe with latitude and longitude lines, small luxury cruise ship silhouette at the bottom, circular composition, deep navy blue and gold color scheme, transparent background, vector-like clean design, premium brand identity"
-- **Result:** ✅ Generated successfully
-
-### marcus-portrait.png
-- **Model:** gpt-image-1.5
-- **Size:** 1024x1536
-- **Quality:** high
-- **Command:** `openai-image generate`
-- **Prompt:** "Professional portrait of a confident business mentor and executive: middle-aged man, bald head, well-groomed beard, elegant dark suit, colorful pocket square scarf, serious and authoritative expression, dramatic studio lighting, dark navy blue background, high-end professional headshot style, luxury and success vibes, cinematic lighting from above-left"
-- **Result:** ✅ Generated successfully
+## logo-globe.png
+**Model:** gpt-image-1.5 | **Size:** 1024x1024 | **Quality:** high | **Background:** transparent
+**Prompt:** Minimalist globe logo mark, gold color, nautical compass rose integrated with a globe shape, tiny ship silhouette at bottom, small star accent at top right, clean flat geometric, premium luxury feel, transparent background, single gold color

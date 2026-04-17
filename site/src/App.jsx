@@ -1,559 +1,430 @@
-import { useEffect, useRef } from 'react';
+import React from 'react';
 
-// ─── Scroll reveal hook ───────────────────────────────────────────────────────
-function useScrollReveal() {
-  useEffect(() => {
-    const els = document.querySelectorAll('.section-reveal');
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add('visible')),
-      { threshold: 0.12 }
-    );
-    els.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-}
+const BASE = import.meta.env.BASE_URL;
 
-// ─── GoldDivider ─────────────────────────────────────────────────────────────
 function GoldDivider() {
   return (
-    <div className="flex items-center justify-center my-6 gap-3">
-      <div className="h-px flex-1 max-w-16 bg-gradient-to-r from-transparent to-gold-500/60" />
-      <span className="text-gold-500 text-lg">⚓</span>
-      <div className="h-px flex-1 max-w-16 bg-gradient-to-l from-transparent to-gold-500/60" />
+    <div className="flex items-center gap-4 my-8">
+      <div className="flex-1 h-px bg-gradient-to-r from-transparent via-yellow-600 to-transparent opacity-60" />
+      <svg width="24" height="14" viewBox="0 0 24 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 7 Q6 0 12 7 Q18 14 24 7" stroke="#C9A84C" strokeWidth="1.5" fill="none"/>
+      </svg>
+      <div className="flex-1 h-px bg-gradient-to-r from-transparent via-yellow-600 to-transparent opacity-60" />
     </div>
   );
 }
 
-// ─── Header ──────────────────────────────────────────────────────────────────
-function Header() {
+function StarIcon() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-navy-950/90 backdrop-blur-md border-b border-gold-500/20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <img
-            src="/deed-hunter-cruise/assets/logo-globe.png"
-            alt="The Deed Hunter Logo"
-            className="h-10 w-10 object-contain"
-          />
-          <div className="hidden sm:block">
-            <p className="text-gold-500 text-xs font-body tracking-widest uppercase font-semibold leading-tight">
-              Cruzeiro ⚓
-            </p>
-            <p className="text-white text-sm font-display font-semibold leading-tight">
-              The Deed Hunter
-            </p>
-          </div>
-        </div>
-        <a
-          href="https://wa.me/16892650838"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white text-sm font-semibold px-4 py-2 rounded-full transition-all duration-200 hover:scale-105 shadow-lg"
-        >
-          <WhatsAppIcon />
-          <span className="hidden xs:inline">WhatsApp</span>
-        </a>
-      </div>
-    </header>
-  );
-}
-
-// ─── Icons ───────────────────────────────────────────────────────────────────
-function WhatsAppIcon({ size = 20 }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="#C9A84C" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8 0l1.8 5.5H16l-4.9 3.6 1.9 5.9L8 11.4l-5 3.6 1.9-5.9L0 5.5h6.2z"/>
     </svg>
   );
 }
 
 function CheckIcon() {
   return (
-    <svg className="w-5 h-5 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="10" cy="10" r="10" fill="#C9A84C" opacity="0.15"/>
+      <path d="M5 10l4 4 6-7" stroke="#C9A84C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   );
 }
 
-function XIcon() {
+function CrossIcon() {
   return (
-    <svg className="w-5 h-5 text-red-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="10" cy="10" r="10" fill="#ef4444" opacity="0.15"/>
+      <path d="M7 7l6 6M13 7l-6 6" stroke="#ef4444" strokeWidth="2" strokeLinecap="round"/>
     </svg>
   );
 }
 
-// ─── HeroSection ─────────────────────────────────────────────────────────────
-function HeroSection() {
+function WaveOrnament() {
   return (
-    <section
-      id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{
-        backgroundImage: `url('/deed-hunter-cruise/assets/hero-bg.png')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
+    <svg width="300" height="20" viewBox="0 0 300 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-auto opacity-50">
+      <path d="M0 10 Q15 2 30 10 Q45 18 60 10 Q75 2 90 10 Q105 18 120 10 Q135 2 150 10 Q165 18 180 10 Q195 2 210 10 Q225 18 240 10 Q255 2 270 10 Q285 18 300 10" stroke="#C9A84C" strokeWidth="1.5" fill="none"/>
+    </svg>
+  );
+}
+
+export default function App() {
+  return (
+    <div
+      className="min-h-screen text-white"
+      style={{ backgroundColor: '#0B1537', fontFamily: "'Lato', sans-serif" }}
     >
-      {/* Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-navy-950/80 via-navy-900/70 to-navy-950/95" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.08)_0%,transparent_70%)]" />
-
-      {/* Ship image bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-64 sm:h-96 overflow-hidden">
-        <img
-          src="/deed-hunter-cruise/assets/hero-ship.png"
-          alt="Navio de Cruzeiro"
-          className="w-full h-full object-cover object-bottom opacity-50"
-          style={{ maskImage: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%)' }}
+      {/* ──────────────────────────────────────────────────────────
+          SECTION 1: HERO
+      ────────────────────────────────────────────────────────── */}
+      <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
+        {/* Background ship image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url(${BASE}assets/hero-bg.png)`,
+            opacity: 0.35,
+          }}
         />
-      </div>
+        {/* Dark overlay gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0B1537]/80 via-[#0B1537]/40 to-[#0B1537]/90" />
 
-      {/* Content */}
-      <div className="relative z-10 text-center px-4 sm:px-8 max-w-4xl mx-auto pt-20">
-        {/* Top badge */}
-        <div className="inline-flex items-center gap-2 border border-gold-500/50 bg-navy-800/60 backdrop-blur-sm rounded-full px-5 py-2 mb-6 animate-fade-in">
-          <span className="text-gold-500 text-sm font-body font-semibold tracking-widest uppercase">
-            CRUZEIRO ⚓
-          </span>
-        </div>
-
-        {/* Main title */}
-        <h1
-          className="font-display text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-black leading-none tracking-tight mb-4 animate-fade-in-up"
-          style={{ animationDelay: '0.2s', opacity: 0 }}
-        >
-          <span className="gold-gradient">THE DEED HUNTER</span>
-          <br />
-          <span className="text-white text-3xl sm:text-5xl lg:text-6xl xl:text-7xl">WORLD AT SEA</span>
-        </h1>
-
-        {/* Subtitle */}
-        <p
-          className="text-gold-300/80 font-body text-lg sm:text-xl lg:text-2xl mb-6 tracking-wide animate-fade-in-up"
-          style={{ animationDelay: '0.4s', opacity: 0 }}
-        >
-          A bordo no <span className="text-gold-400 font-semibold">Utopia Ship</span>
-        </p>
-
-        {/* Exclusive badge */}
-        <div
-          className="inline-block gold-border-gradient rounded-2xl px-6 py-3 mb-8 animate-fade-in-up"
-          style={{ animationDelay: '0.5s', opacity: 0 }}
-        >
-          <span className="text-gold-500 text-xs font-body font-bold tracking-widest uppercase mr-2">[EXCLUSIVO]</span>
-          <span className="text-white font-body font-semibold text-sm sm:text-base">
-            Mastermind com <span className="text-gold-400">Marcos Jacober</span>
-          </span>
-        </div>
-
-        {/* Date */}
-        <div
-          className="flex items-center justify-center gap-4 mb-10 animate-fade-in-up"
-          style={{ animationDelay: '0.6s', opacity: 0 }}
-        >
-          <div className="text-center">
-            <p className="text-gold-500 font-display text-2xl sm:text-3xl font-bold tracking-wider">AGOSTO</p>
-            <p className="text-white/60 text-xs font-body tracking-widest uppercase">Mês</p>
+        <div className="relative z-10 w-full max-w-5xl mx-auto px-4 py-16 flex flex-col items-center text-center">
+          {/* Logo */}
+          <div className="mb-6">
+            <img
+              src={`${BASE}assets/logo-globe.png`}
+              alt="The Deed Hunter Globe Logo"
+              className="h-24 w-24 mx-auto drop-shadow-2xl"
+            />
           </div>
-          <div className="h-10 w-px bg-gold-500/40" />
-          <div className="text-center">
-            <p className="text-gold-500 font-display text-2xl sm:text-3xl font-bold tracking-wider">10 A 14</p>
-            <p className="text-white/60 text-xs font-body tracking-widest uppercase">Dias</p>
-          </div>
-          <div className="h-10 w-px bg-gold-500/40" />
-          <div className="text-center">
-            <p className="text-gold-500 font-display text-2xl sm:text-3xl font-bold tracking-wider">2026</p>
-            <p className="text-white/60 text-xs font-body tracking-widest uppercase">Ano</p>
-          </div>
-        </div>
 
-        {/* CTA */}
-        <div
-          className="animate-fade-in-up"
-          style={{ animationDelay: '0.8s', opacity: 0 }}
-        >
-          <a
-            href="https://wa.me/16892650838"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 bg-green-600 hover:bg-green-500 text-white font-bold text-lg px-8 py-4 rounded-full transition-all duration-300 hover:scale-105 shadow-[0_8px_32px_rgba(22,163,74,0.4)]"
+          {/* Stars row */}
+          <div className="flex gap-2 mb-4">
+            {[...Array(5)].map((_, i) => <StarIcon key={i} />)}
+          </div>
+
+          {/* Main title */}
+          <h1
+            className="text-2xl sm:text-3xl md:text-5xl font-bold tracking-widest uppercase mb-2"
+            style={{ fontFamily: "'Cinzel', serif", color: '#C9A84C' }}
           >
-            <WhatsAppIcon size={24} />
-            Garantir Minha Vaga
-          </a>
-          <p className="text-gold-300/60 text-sm mt-3 font-body">
-            +1 (689) 265-0838
-          </p>
-        </div>
-
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <svg className="w-6 h-6 text-gold-500/60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-          </svg>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ─── EventDetails ─────────────────────────────────────────────────────────────
-function EventDetails() {
-  const details = [
-    {
-      icon: '📅',
-      title: 'Data do Evento',
-      value: 'Agosto 10–14, 2026',
-      sub: '5 dias a bordo',
-    },
-    {
-      icon: '🚢',
-      title: 'Embarcação',
-      value: 'Utopia Ship',
-      sub: 'Cruzeiro de luxo',
-    },
-    {
-      icon: '🎯',
-      title: 'Formato',
-      value: 'Mastermind Exclusivo',
-      sub: 'Com Marcos Jacober',
-    },
-  ];
-
-  return (
-    <section className="py-20 sm:py-28 bg-navy-800/50 relative">
-      <div className="max-w-6xl mx-auto px-4 sm:px-8">
-        <div className="text-center mb-12 section-reveal">
-          <span className="text-gold-500 text-xs font-body tracking-widest uppercase font-semibold">O Evento</span>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white mt-2">
-            Uma experiência <span className="gold-gradient">única</span>
+            CRUZEIRO
+          </h1>
+          <div className="flex items-center gap-3 mb-2">
+            <div className="h-px w-12 bg-yellow-600 opacity-60" />
+            <span className="text-xl" aria-label="anchor">⚓</span>
+            <div className="h-px w-12 bg-yellow-600 opacity-60" />
+          </div>
+          <h2
+            className="text-xl sm:text-2xl md:text-4xl font-bold tracking-widest uppercase leading-tight"
+            style={{ fontFamily: "'Cinzel', serif", color: '#E8C86A' }}
+          >
+            THE DEED HUNTER
           </h2>
+          <h3
+            className="text-lg sm:text-xl md:text-3xl font-semibold tracking-wider uppercase mt-1"
+            style={{ fontFamily: "'Cinzel', serif", color: '#C9A84C' }}
+          >
+            WORLD AT SEA
+          </h3>
+
           <GoldDivider />
-          <p className="text-white/60 max-w-2xl mx-auto font-body text-base sm:text-lg">
-            Combine aprendizado de alto nível com a grandiosidade de um cruzeiro de luxo. Cinco dias de imersão, networking de elite e estratégias que transformam resultados.
+
+          {/* Hero person image */}
+          <div className="relative mb-6">
+            <img
+              src={`${BASE}assets/hero-person.png`}
+              alt="Marcos Jacober — Mastermind Advisor"
+              className="mx-auto max-h-[480px] object-contain drop-shadow-2xl"
+              style={{ filter: 'drop-shadow(0 0 40px rgba(201,168,76,0.3))' }}
+            />
+          </div>
+
+          {/* Subheading */}
+          <p
+            className="text-sm sm:text-base tracking-[0.3em] uppercase"
+            style={{ fontFamily: "'Cinzel', serif", color: '#C9A84C', opacity: 0.85 }}
+          >
+            A bordo no Utopia Ship
           </p>
         </div>
+      </section>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          {details.map((item, i) => (
+      {/* ──────────────────────────────────────────────────────────
+          SECTION 2: EXCLUSIVO BADGE + MASTERMIND INFO
+      ────────────────────────────────────────────────────────── */}
+      <section className="relative py-12 px-4" style={{ backgroundColor: '#070E25' }}>
+        <div className="max-w-3xl mx-auto text-center">
+          {/* EXCLUSIVO badge */}
+          <div className="inline-block mb-6">
             <div
-              key={i}
-              className="section-reveal gold-border-gradient rounded-2xl p-6 sm:p-8 text-center hover:bg-navy-700/40 transition-colors duration-300"
-              style={{ transitionDelay: `${i * 0.1}s` }}
+              className="px-8 py-2 text-sm tracking-[0.4em] uppercase font-bold border"
+              style={{
+                fontFamily: "'Cinzel', serif",
+                color: '#070E25',
+                backgroundColor: '#C9A84C',
+                borderColor: '#C9A84C',
+                letterSpacing: '0.35em',
+              }}
             >
-              <span className="text-4xl mb-4 block">{item.icon}</span>
-              <p className="text-gold-500/80 text-xs font-body tracking-widest uppercase mb-1">{item.title}</p>
-              <p className="text-white font-display text-xl sm:text-2xl font-bold mb-1">{item.value}</p>
-              <p className="text-white/50 font-body text-sm">{item.sub}</p>
+              ✦ EXCLUSIVO ✦
             </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+          </div>
 
-// ─── PricingSection ───────────────────────────────────────────────────────────
-function PricingSection() {
-  return (
-    <section className="py-20 sm:py-28 relative overflow-hidden">
-      {/* BG glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.06)_0%,transparent_70%)]" />
-
-      <div className="max-w-4xl mx-auto px-4 sm:px-8">
-        <div className="text-center mb-12 section-reveal">
-          <span className="text-gold-500 text-xs font-body tracking-widest uppercase font-semibold">Investimento</span>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white mt-2">
-            Oferta <span className="gold-gradient">Especial</span>
+          <p
+            className="text-lg sm:text-xl tracking-widest uppercase mb-2"
+            style={{ fontFamily: "'Cinzel', serif", color: '#E8C86A' }}
+          >
+            Mastermind com
+          </p>
+          <h2
+            className="text-3xl sm:text-4xl md:text-5xl font-bold uppercase tracking-wider"
+            style={{ fontFamily: "'Cinzel', serif", color: '#C9A84C' }}
+          >
+            Marcos Jacober
           </h2>
+
           <GoldDivider />
+
+          <p
+            className="text-base sm:text-lg tracking-widest uppercase"
+            style={{ fontFamily: "'Cinzel', serif", color: '#E8C86A', opacity: 0.8 }}
+          >
+            A bordo no Utopia Ship — Royal Caribbean
+          </p>
         </div>
+      </section>
 
-        {/* Pricing Card */}
-        <div className="section-reveal gold-border-gradient rounded-3xl p-8 sm:p-12 relative overflow-hidden">
-          {/* Corner glow */}
-          <div className="absolute -top-20 -right-20 w-64 h-64 bg-gold-500/10 rounded-full blur-3xl" />
-          <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-gold-500/5 rounded-full blur-3xl" />
+      {/* ──────────────────────────────────────────────────────────
+          SECTION 3: DATE
+      ────────────────────────────────────────────────────────── */}
+      <section className="py-16 px-4" style={{ backgroundColor: '#0B1537' }}>
+        <div className="max-w-3xl mx-auto text-center">
+          <p
+            className="text-sm tracking-[0.4em] uppercase mb-4"
+            style={{ fontFamily: "'Cinzel', serif", color: '#C9A84C', opacity: 0.7 }}
+          >
+            Data do Evento
+          </p>
+          <div
+            className="text-3xl sm:text-5xl md:text-7xl font-bold tracking-widest uppercase"
+            style={{ fontFamily: "'Cinzel', serif", color: '#C9A84C' }}
+          >
+            AGOSTO
+          </div>
+          <div className="flex items-center justify-center gap-4 my-3">
+            <div className="h-px flex-1 max-w-[100px] bg-yellow-700 opacity-50" />
+            <span
+              className="text-2xl sm:text-4xl md:text-6xl font-bold tracking-widest"
+              style={{ fontFamily: "'Cinzel', serif", color: '#E8C86A' }}
+            >
+              10 A 14
+            </span>
+            <div className="h-px flex-1 max-w-[100px] bg-yellow-700 opacity-50" />
+          </div>
+          <div
+            className="text-3xl sm:text-5xl md:text-7xl font-bold tracking-widest uppercase"
+            style={{ fontFamily: "'Cinzel', serif", color: '#C9A84C' }}
+          >
+            2026
+          </div>
 
+          <div className="mt-6 flex justify-center gap-2">
+            {[...Array(5)].map((_, i) => <StarIcon key={i} />)}
+          </div>
+        </div>
+      </section>
+
+      {/* ──────────────────────────────────────────────────────────
+          SECTION 4 & 5: PRICING CARD + CABIN
+      ────────────────────────────────────────────────────────── */}
+      <section className="py-16 px-4" style={{ backgroundColor: '#070E25' }}>
+        <div className="max-w-2xl mx-auto">
           {/* Discount badge */}
-          <div className="relative">
-            <div className="inline-flex items-center gap-2 bg-gold-500/20 border border-gold-500/40 rounded-full px-4 py-1 mb-6">
-              <span className="text-gold-400 text-xs font-body font-bold tracking-widest uppercase">
-                Desconto especial para Next Level e Partner's Club
+          <div className="text-center mb-6">
+            <span
+              className="inline-block px-6 py-2 text-xs sm:text-sm tracking-widest uppercase font-bold"
+              style={{
+                fontFamily: "'Cinzel', serif",
+                color: '#070E25',
+                backgroundColor: '#C9A84C',
+              }}
+            >
+              Desconto especial para Next Level e Partner's Club
+            </span>
+          </div>
+
+          {/* Gold-bordered pricing card */}
+          <div
+            className="rounded-lg p-8 sm:p-10 text-center"
+            style={{
+              border: '1px solid #C9A84C',
+              backgroundColor: '#0B1537',
+              boxShadow: '0 0 40px rgba(201,168,76,0.15), inset 0 0 60px rgba(201,168,76,0.04)',
+            }}
+          >
+            {/* Original price */}
+            <p className="text-sm uppercase tracking-widest mb-2" style={{ color: '#C9A84C', opacity: 0.7, fontFamily: "'Cinzel', serif" }}>
+              De:
+            </p>
+            <p className="text-xl sm:text-2xl font-light mb-1" style={{ color: '#aaa', textDecoration: 'line-through' }}>
+              $2.997,00
+            </p>
+
+            {/* OFF badge */}
+            <div className="inline-block my-3 px-5 py-2 rounded-full" style={{ backgroundColor: '#8B0000', border: '1px solid #ef4444' }}>
+              <span className="text-lg sm:text-2xl font-bold text-white" style={{ fontFamily: "'Cinzel', serif" }}>
+                $999,00 <span className="text-sm tracking-widest">OFF</span>
               </span>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-8">
-              {/* Strikethrough price */}
-              <div>
-                <p className="text-white/40 font-body text-sm mb-1">De:</p>
-                <p className="text-white/40 font-display text-2xl sm:text-3xl line-through decoration-red-400/60">
-                  $2,997.00
-                </p>
-              </div>
-
-              <div className="text-3xl text-gold-500/60 hidden sm:block">→</div>
-
-              {/* Discount */}
-              <div className="flex items-center gap-3 bg-red-900/30 border border-red-500/30 rounded-2xl px-5 py-3">
-                <span className="text-red-400 font-display text-2xl font-bold">$999.00</span>
-                <span className="text-red-400/80 font-body text-lg font-semibold">OFF</span>
-              </div>
-            </div>
+            <GoldDivider />
 
             {/* Final price */}
-            <div className="border-t border-gold-500/20 pt-8">
-              <p className="text-white/60 font-body text-sm tracking-widest uppercase mb-2">Final Price</p>
-              <p className="font-display text-6xl sm:text-7xl font-black gold-gradient leading-none">
-                $1,998.00
-              </p>
-              <p className="text-white/40 font-body text-sm mt-2">por pessoa (cabine interna)</p>
+            <p className="text-sm uppercase tracking-widest mb-2" style={{ color: '#C9A84C', opacity: 0.7, fontFamily: "'Cinzel', serif" }}>
+              Preço Final:
+            </p>
+            <div
+              className="text-4xl sm:text-6xl font-bold my-2"
+              style={{ fontFamily: "'Cinzel', serif", color: '#C9A84C' }}
+            >
+              $1.998,00
             </div>
 
-            {/* Cabins */}
-            <div className="mt-8 flex flex-col sm:flex-row gap-4">
-              <div className="flex-1 bg-navy-700/50 border border-gold-500/20 rounded-2xl p-4 text-center">
-                <p className="text-gold-500 font-body text-xs tracking-widest uppercase font-semibold mb-1">Cabine Interna</p>
-                <p className="text-white font-display text-xl font-bold">$1,998.00</p>
-                <p className="text-white/40 text-xs mt-1">Preço final com desconto</p>
-              </div>
-              <div className="flex-1 bg-navy-700/50 border border-ocean-400/20 rounded-2xl p-4 text-center">
-                <p className="text-ocean-400 font-body text-xs tracking-widest uppercase font-semibold mb-1">Cabine Varanda</p>
-                <p className="text-white font-display text-xl font-bold">Consulte</p>
-                <p className="text-white/40 text-xs mt-1">Opção com vista para o mar</p>
-              </div>
-            </div>
+            <GoldDivider />
 
-            {/* CTA */}
-            <div className="mt-8 text-center">
-              <a
-                href="https://wa.me/16892650838"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 bg-green-600 hover:bg-green-500 text-white font-bold text-lg px-10 py-4 rounded-full transition-all duration-300 hover:scale-105 shadow-[0_8px_32px_rgba(22,163,74,0.4)]"
+            {/* Cabin info */}
+            <div className="mt-4">
+              <p
+                className="text-lg sm:text-xl tracking-widest uppercase font-semibold"
+                style={{ fontFamily: "'Cinzel', serif", color: '#E8C86A' }}
               >
-                <WhatsAppIcon size={22} />
-                Reservar Agora
-              </a>
-              <p className="text-white/30 text-xs mt-4 font-body max-w-sm mx-auto">
-                Sua cabine só será garantida mediante ao Downpayment e parcelamento efetivo.
+                Cabine Interna
+              </p>
+              <p className="text-sm mt-1" style={{ color: '#C9A84C', opacity: 0.75 }}>
+                Opção: Cabine Varanda
               </p>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-  );
-}
+      </section>
 
-// ─── IncludesSection ─────────────────────────────────────────────────────────
-function IncludesSection() {
-  const includes = ['Masterclass', 'Impostos', 'Seguro viagem'];
-  const excludes = ['Pacote de bebida', 'Internet', 'Passeios', 'Extra tip'];
+      {/* ──────────────────────────────────────────────────────────
+          SECTION 6: INCLUDES / NOT INCLUDES
+      ────────────────────────────────────────────────────────── */}
+      <section className="py-16 px-4" style={{ backgroundColor: '#0B1537' }}>
+        <div className="max-w-3xl mx-auto">
+          <h3
+            className="text-center text-xl sm:text-2xl uppercase tracking-widest mb-10"
+            style={{ fontFamily: "'Cinzel', serif", color: '#C9A84C' }}
+          >
+            O que está incluído
+          </h3>
 
-  return (
-    <section className="py-20 sm:py-28 bg-navy-800/30">
-      <div className="max-w-5xl mx-auto px-4 sm:px-8">
-        <div className="text-center mb-12 section-reveal">
-          <span className="text-gold-500 text-xs font-body tracking-widest uppercase font-semibold">Detalhes do Pacote</span>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white mt-2">
-            O que <span className="gold-gradient">inclui</span>
-          </h2>
-          <GoldDivider />
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-          {/* Inclui */}
-          <div className="section-reveal gold-border-gradient rounded-2xl p-6 sm:p-8">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 bg-green-500/20 rounded-full flex items-center justify-center">
-                <span className="text-green-400 text-lg">✅</span>
-              </div>
-              <h3 className="text-white font-display text-xl font-bold">INCLUI</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Inclui */}
+            <div
+              className="rounded-lg p-6"
+              style={{ border: '1px solid rgba(201,168,76,0.3)', backgroundColor: 'rgba(201,168,76,0.04)' }}
+            >
+              <h4
+                className="text-center text-sm tracking-[0.3em] uppercase mb-5 pb-3"
+                style={{
+                  fontFamily: "'Cinzel', serif",
+                  color: '#C9A84C',
+                  borderBottom: '1px solid rgba(201,168,76,0.3)',
+                }}
+              >
+                ✓ Inclui
+              </h4>
+              <ul className="space-y-4">
+                {['Masterclass', 'Impostos', 'Seguro viagem'].map((item) => (
+                  <li key={item} className="flex items-center gap-3">
+                    <CheckIcon />
+                    <span className="text-base text-gray-200 font-light">{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <ul className="space-y-4">
-              {includes.map((item, i) => (
-                <li key={i} className="flex items-center gap-3">
-                  <CheckIcon />
-                  <span className="text-white/90 font-body text-base">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
 
-          {/* Não inclui */}
-          <div className="section-reveal bg-navy-800/60 border border-red-500/20 rounded-2xl p-6 sm:p-8">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 bg-red-500/20 rounded-full flex items-center justify-center">
-                <span className="text-red-400 text-lg">❌</span>
-              </div>
-              <h3 className="text-white font-display text-xl font-bold">NÃO INCLUI</h3>
-            </div>
-            <ul className="space-y-4">
-              {excludes.map((item, i) => (
-                <li key={i} className="flex items-center gap-3">
-                  <XIcon />
-                  <span className="text-white/70 font-body text-base">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ─── AboutSection ─────────────────────────────────────────────────────────────
-function AboutSection() {
-  return (
-    <section className="py-20 sm:py-28 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(212,175,55,0.05)_0%,transparent_60%)]" />
-
-      <div className="max-w-6xl mx-auto px-4 sm:px-8">
-        <div className="text-center mb-12 section-reveal">
-          <span className="text-gold-500 text-xs font-body tracking-widest uppercase font-semibold">Seu Mentor</span>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white mt-2">
-            <span className="gold-gradient">Marcos Jacober</span>
-          </h2>
-          <GoldDivider />
-        </div>
-
-        <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
-          {/* Photo */}
-          <div className="section-reveal flex-shrink-0 w-56 sm:w-72 lg:w-80">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-tr from-gold-500/30 to-transparent rounded-2xl blur-xl scale-110" />
-              <img
-                src="/deed-hunter-cruise/assets/marcus-portrait.png"
-                alt="Marcos Jacober"
-                className="relative rounded-2xl w-full object-cover shadow-2xl gold-border-gradient"
-                style={{ aspectRatio: '3/4' }}
-              />
-            </div>
-          </div>
-
-          {/* Content */}
-          <div className="section-reveal flex-1 text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 border border-gold-500/30 rounded-full px-4 py-1.5 mb-6">
-              <span className="text-gold-500 text-xs font-body tracking-widest uppercase font-semibold">
-                [EXCLUSIVO] Mastermind
-              </span>
-            </div>
-            <h3 className="font-display text-2xl sm:text-3xl font-bold text-white mb-4">
-              O Caçador de Títulos
-            </h3>
-            <p className="text-white/70 font-body text-base sm:text-lg leading-relaxed mb-6">
-              Marcos Jacober é referência no mercado de tax deed e tax lien nos Estados Unidos. Com anos de experiência no setor imobiliário americano, ele já ajudou centenas de investidores a conquistarem resultados extraordinários através de estratégias únicas de aquisição de propriedades.
-            </p>
-            <p className="text-white/70 font-body text-base sm:text-lg leading-relaxed mb-8">
-              Neste Mastermind exclusivo a bordo do Utopia Ship, você terá acesso direto ao Marcos e sua metodologia comprovada durante 5 dias de imersão completa no oceano.
-            </p>
-            <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
-              {['Estrategista', 'Investidor', 'Mentor', 'Palestrante'].map((tag) => (
-                <span key={tag} className="bg-navy-700/60 border border-gold-500/20 rounded-full px-4 py-1.5 text-gold-400 text-sm font-body font-medium">
-                  {tag}
-                </span>
-              ))}
+            {/* Não inclui */}
+            <div
+              className="rounded-lg p-6"
+              style={{ border: '1px solid rgba(239,68,68,0.3)', backgroundColor: 'rgba(239,68,68,0.04)' }}
+            >
+              <h4
+                className="text-center text-sm tracking-[0.3em] uppercase mb-5 pb-3"
+                style={{
+                  fontFamily: "'Cinzel', serif",
+                  color: '#ef4444',
+                  borderBottom: '1px solid rgba(239,68,68,0.3)',
+                }}
+              >
+                ✗ Não Inclui
+              </h4>
+              <ul className="space-y-4">
+                {['Pacote de bebida', 'Internet', 'Passeios', 'Extra tip'].map((item) => (
+                  <li key={item} className="flex items-center gap-3">
+                    <CrossIcon />
+                    <span className="text-base text-gray-400 font-light">{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-  );
-}
+      </section>
 
-// ─── CTASection ───────────────────────────────────────────────────────────────
-function CTASection() {
-  return (
-    <section className="py-20 sm:py-28 bg-navy-800/50 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(22,163,74,0.08)_0%,transparent_70%)]" />
-
-      <div className="max-w-3xl mx-auto px-4 sm:px-8 text-center section-reveal">
-        <span className="text-gold-500 text-xs font-body tracking-widest uppercase font-semibold">Reserve sua vaga</span>
-        <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white mt-3 mb-4">
-          Entre em contato pelo <span className="gold-gradient">WhatsApp</span>
-        </h2>
-        <GoldDivider />
-        <p className="text-white/60 font-body text-base sm:text-lg mb-10">
-          As vagas são limitadas. Entre em contato agora e garanta seu lugar nesta experiência única.
-        </p>
-
-        <div className="gold-border-gradient rounded-3xl p-8 sm:p-12 relative">
-          <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-24 h-24 bg-green-600/20 rounded-full blur-2xl" />
-          
-          <p className="text-white/60 font-body text-sm tracking-widest uppercase mb-2">CONTATO WHATSAPP</p>
-          <p className="font-display text-3xl sm:text-4xl font-bold text-white mb-8">
-            +1 (689) 265-0838
+      {/* ──────────────────────────────────────────────────────────
+          SECTION 7: CTA — WhatsApp
+      ────────────────────────────────────────────────────────── */}
+      <section className="py-20 px-4" style={{ backgroundColor: '#070E25' }}>
+        <div className="max-w-2xl mx-auto text-center">
+          <p
+            className="text-sm tracking-[0.4em] uppercase mb-4"
+            style={{ fontFamily: "'Cinzel', serif", color: '#C9A84C', opacity: 0.8 }}
+          >
+            Garanta sua vaga agora
           </p>
+          <h3
+            className="text-2xl sm:text-3xl font-bold uppercase tracking-widest mb-8"
+            style={{ fontFamily: "'Cinzel', serif", color: '#E8C86A' }}
+          >
+            Entre em Contato
+          </h3>
 
           <a
             href="https://wa.me/16892650838"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 bg-green-600 hover:bg-green-500 text-white font-bold text-xl px-12 py-5 rounded-full transition-all duration-300 hover:scale-105 shadow-[0_8px_40px_rgba(22,163,74,0.5)]"
+            className="inline-flex items-center gap-3 px-10 py-4 rounded-full text-white font-bold text-lg transition-transform hover:scale-105 active:scale-95"
+            style={{ backgroundColor: '#25D366', boxShadow: '0 4px 30px rgba(37,211,102,0.4)' }}
           >
-            <WhatsAppIcon size={28} />
-            Falar no WhatsApp
+            {/* WhatsApp icon */}
+            <svg width="26" height="26" viewBox="0 0 32 32" fill="white" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16.002 2.4C8.48 2.4 2.4 8.48 2.4 16.002c0 2.395.63 4.732 1.826 6.79L2.4 29.6l7.026-1.804A13.538 13.538 0 0016.002 29.6C23.522 29.6 29.6 23.52 29.6 16.002 29.6 8.48 23.522 2.4 16.002 2.4zm0 24.64a11.095 11.095 0 01-5.652-1.543l-.404-.24-4.17 1.072 1.104-4.06-.263-.418A11.042 11.042 0 014.944 16C4.944 9.857 9.857 4.944 16 4.944c6.142 0 11.055 4.913 11.055 11.058 0 6.143-4.913 11.038-11.053 11.038zm6.073-8.273c-.333-.166-1.966-.97-2.272-1.08-.305-.11-.527-.166-.748.167-.222.333-.858 1.08-1.052 1.303-.194.222-.388.25-.721.083-.333-.166-1.406-.518-2.678-1.654-.99-.883-1.659-1.975-1.854-2.308-.193-.333-.02-.512.146-.678.15-.149.332-.389.499-.583.166-.194.222-.333.333-.555.11-.222.055-.416-.028-.583-.083-.166-.748-1.803-1.025-2.47-.27-.649-.547-.561-.748-.572l-.638-.012a1.222 1.222 0 00-.887.416c-.305.333-1.163 1.137-1.163 2.773 0 1.636 1.19 3.218 1.357 3.44.166.223 2.34 3.573 5.671 5.01.793.343 1.412.547 1.894.7.796.25 1.52.215 2.093.13.638-.094 1.966-.804 2.244-1.58.278-.776.278-1.44.194-1.58-.082-.138-.305-.222-.638-.388z"/>
+            </svg>
+            <span>WhatsApp: +1 (689) 265-0838</span>
           </a>
 
-          <p className="text-white/30 text-xs mt-6 font-body max-w-sm mx-auto">
-            Preenchimento do Registro — todos os campos obrigatórios
+          <GoldDivider />
+
+          <p className="text-sm" style={{ color: '#C9A84C', opacity: 0.6 }}>
+            Clique para iniciar o contato no WhatsApp
           </p>
         </div>
-      </div>
-    </section>
-  );
-}
+      </section>
 
-// ─── Footer ───────────────────────────────────────────────────────────────────
-function Footer() {
-  return (
-    <footer className="py-12 bg-navy-950 border-t border-gold-500/10">
-      <div className="max-w-6xl mx-auto px-4 sm:px-8 text-center">
-        <div className="flex items-center justify-center gap-3 mb-6">
-          <img
-            src="/deed-hunter-cruise/assets/logo-globe.png"
-            alt="Logo"
-            className="h-10 w-10 object-contain opacity-70"
-          />
-          <div>
-            <p className="text-gold-500/80 text-xs font-body tracking-widest uppercase font-semibold">Cruzeiro ⚓</p>
-            <p className="text-white/60 text-sm font-display font-semibold">The Deed Hunter World At Sea</p>
+      {/* ──────────────────────────────────────────────────────────
+          SECTION 8: FOOTER
+      ────────────────────────────────────────────────────────── */}
+      <footer
+        className="py-12 px-4 text-center"
+        style={{ backgroundColor: '#070E25', borderTop: '1px solid rgba(201,168,76,0.2)' }}
+      >
+        <div className="max-w-2xl mx-auto">
+          <WaveOrnament />
+
+          <div className="mt-8 space-y-3">
+            <p className="text-xs sm:text-sm" style={{ color: '#C9A84C', opacity: 0.65, lineHeight: '1.7' }}>
+              ⚠️ Sua cabine só será garantida mediante ao Downpayment e parcelamento efetivo.
+            </p>
+            <p className="text-xs sm:text-sm" style={{ color: '#C9A84C', opacity: 0.65, lineHeight: '1.7' }}>
+              📋 Preenchimento do Registro — todos os campos obrigatórios.
+            </p>
           </div>
-        </div>
-        
-        <div className="border-t border-gold-500/10 pt-6 space-y-3">
-          <p className="text-white/40 font-body text-xs sm:text-sm max-w-2xl mx-auto">
-            Sua cabine só será garantida mediante ao Downpayment e parcelamento efetivo.
-          </p>
-          <p className="text-white/30 font-body text-xs max-w-2xl mx-auto">
-            Preenchimento do Registro — todos os campos obrigatórios.
-          </p>
-          <p className="text-white/20 font-body text-xs mt-4">
-            © 2026 The Deed Hunter · Marcos Jacober · Todos os direitos reservados
+
+          <WaveOrnament />
+
+          <p
+            className="mt-8 text-xs tracking-widest uppercase"
+            style={{ fontFamily: "'Cinzel', serif", color: '#C9A84C', opacity: 0.4 }}
+          >
+            © 2026 The Deed Hunter World At Sea — Marcos Jacober
           </p>
         </div>
-      </div>
-    </footer>
-  );
-}
-
-// ─── App ──────────────────────────────────────────────────────────────────────
-export default function App() {
-  useScrollReveal();
-
-  return (
-    <div className="min-h-screen bg-navy-900 font-body">
-      <Header />
-      <HeroSection />
-      <EventDetails />
-      <PricingSection />
-      <IncludesSection />
-      <AboutSection />
-      <CTASection />
-      <Footer />
+      </footer>
     </div>
   );
 }

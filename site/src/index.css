@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,38 +10,17 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply antialiased bg-navy-900 text-white;
-    font-family: 'Inter', system-ui, sans-serif;
+    @apply antialiased bg-navy text-white;
+    font-family: 'Lato', sans-serif;
   }
-  img, picture, video, canvas, svg {
-    display: block;
-    max-width: 100%;
-    height: auto;
-  }
+  img, picture, video, canvas, svg { display: block; max-width: 100%; height: auto; }
 }
 
 @layer utilities {
-  .gold-gradient {
-    background: linear-gradient(135deg, #F5D078, #D4AF37, #C8A84B);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .gold-border-gradient {
-    border: 1px solid transparent;
-    background: linear-gradient(#0D1F3C, #0D1F3C) padding-box,
-                linear-gradient(135deg, #F5D078, #D4AF37, #C8A84B) border-box;
-  }
-  .navy-gradient {
-    background: linear-gradient(180deg, #060E1A 0%, #0A1628 50%, #0D1F3C 100%);
-  }
-  .section-reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-  }
-  .section-reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .font-cinzel { font-family: 'Cinzel', serif; }
+  .font-lato { font-family: 'Lato', sans-serif; }
+  .text-gold { color: #C9A84C; }
+  .text-gold-light { color: #E8C86A; }
+  .border-gold { border-color: #C9A84C; }
+  .bg-gold { background-color: #C9A84C; }
 }

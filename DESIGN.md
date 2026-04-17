@@ -1,92 +1,36 @@
-# DESIGN.md — The Deed Hunter World At Sea
+# DESIGN.md — Design System
 
-## Tailwind Theme Extension
-
+## Color Palette (Tailwind Custom)
 ```js
 colors: {
   navy: {
-    950: '#060E1A',
-    900: '#0A1628',
-    800: '#0D1F3C',
-    700: '#122040',
-    600: '#1A2E57',
+    DEFAULT: '#0B1537',
+    dark: '#070E25',
+    light: '#112045',
   },
   gold: {
-    300: '#F5D078',
-    400: '#E8C050',
-    500: '#D4AF37',
-    600: '#C8A84B',
-    700: '#A88A2E',
+    DEFAULT: '#C9A84C',
+    light: '#E8C86A',
+    dark: '#A07C30',
+    pale: '#F5E6B8',
   },
-  cyan: {
-    400: '#4DD9E0',
-  }
-}
-fontFamily: {
-  display: ['Playfair Display', 'Georgia', 'serif'],
-  body: ['Inter', 'system-ui', 'sans-serif'],
+  cream: '#FDF8EE',
 }
 ```
 
-## Type Scale
+## Typography
+- **Display font:** Cinzel (Google Fonts) — used for all headings, event name, date
+- **Body font:** Lato (Google Fonts) — used for descriptions, pricing, disclaimers
+- Google Fonts import: `@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lato:wght@300;400;700&display=swap')`
 
-| Token | Mobile | Desktop |
-|-------|--------|---------|
-| Hero Title | text-4xl | text-7xl |
-| Section Title | text-2xl | text-4xl |
-| Sub Title | text-xl | text-2xl |
-| Body | text-base | text-lg |
-| Label | text-xs | text-sm |
-| Badge | text-xs uppercase tracking-widest | |
+## Component Patterns
+- Section padding: `py-16 px-4`
+- Max container: `max-w-4xl mx-auto`
+- Gold divider: `border-t border-gold/40 my-8`
+- Card: `border border-gold rounded-lg bg-navy-dark/80 p-8`
+- Badge: `bg-gold text-navy-dark font-cinzel font-bold tracking-widest px-4 py-1 rounded`
 
-## Spacing / Radius / Shadow
-- Section padding: `py-16 px-4 sm:py-24 sm:px-8`
-- Card radius: `rounded-2xl`
-- Card border: `border border-gold-500/30`
-- Hero shadow: `shadow-[0_0_80px_rgba(212,175,55,0.15)]`
-- Button shadow: `shadow-[0_4px_24px_rgba(212,175,55,0.4)]`
-
-## Section Inventory
-
-1. **Hero** — fullscreen `min-h-screen`, background image (hero-bg.png), dark overlay, centered content
-   - Components: HeroSection, DateBadge, CTAButton
-   
-2. **EventDetails** — 3 feature cards (Date, Location, Format)
-   - Components: EventDetailsSection, FeatureCard
-
-3. **PricingCard** — central card with gradient border, strikethrough price, discount badge, final price
-   - Components: PricingSection, PriceCard, DiscountBadge
-
-4. **IncludesExcludes** — 2-column grid with check/X lists
-   - Components: IncludesSection, CheckItem, ExcludeItem
-
-5. **Cabins** — 2 cards side by side (Interna, Varanda)
-   - Components: CabinsSection, CabinCard
-
-6. **AboutMarcos** — photo left, text right (mobile: stacked)
-   - Components: AboutSection, MentorCard
-
-7. **WhatsAppCTA** — dark section, large green button, phone number
-   - Components: CTASection, WhatsAppButton
-
-8. **Footer** — legal text, disclaimer
-
-## Responsive Breakpoints
-
-- **< sm (375px mobile):** Single column, stacked layout, text-center hero
-- **sm (640px):** Still single column, slightly larger text  
-- **md (768px):** 2 columns for includes/excludes and cabins
-- **lg (1024px):** 3 columns for event details, side-by-side about
-- **xl (1280px):** Max-width container 1280px, large hero text
-
-## Motion
-- Hero content: `fade-in` on mount (opacity 0 → 1, translateY 20px → 0, 0.8s ease-out)
-- Sections: Intersection Observer scroll reveal (opacity 0 → 1, 0.6s, staggered)
-- Buttons: `hover:scale-105 transition-transform duration-200`
-- Gold shimmer on hero title: subtle animation on the gold text
-- No excessive animations — premium = restrained
-
-## Navigation
-- No traditional nav (single-page landing)
-- Sticky header with logo and WhatsApp CTA button
-- Mobile: same sticky header, compact
+## Responsive
+- Mobile-first, stack on small screens
+- Two-column grid on md+ for includes section
+- Hero image: full viewport height on desktop, 80vh on mobile
